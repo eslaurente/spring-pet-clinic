@@ -1,13 +1,13 @@
-package laurente.reference.petclicnicapp;
+package laurente.reference.petclinicapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PetClicnicAppApplication {
+public class PetClinicAppApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(PetClicnicAppApplication.class, args);
+        SpringApplication.run(PetClinicAppApplication.class, args);
     }
 
 }

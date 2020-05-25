@@ -1,10 +1,10 @@
-package laurente.reference.petclicnicapp;
+package laurente.reference.petclinicapp;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PetClicnicAppApplicationTests {
+class PetClinicAppApplicationTests {
 
     @Test
     void contextLoads() {
