@@ -3,9 +3,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>laurente.reference</groupId>
-    <artifactId>pet-clicnic-app</artifactId>
+    <artifactId>pet-clinic-app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>pet-clicnic-app</name>
+    <name>pet-clinic-app</name>
     <description>A Pet Clinic web application using Spring</description>
     <packaging>pom</packaging>
 
