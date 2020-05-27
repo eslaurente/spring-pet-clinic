@@ -1,11 +1,11 @@
 package laurente.reference.petclinicapp.services.map;
 
 import laurente.reference.petclinicapp.model.Vet;
-import laurente.reference.petclinicapp.services.CrudService;
+import laurente.reference.petclinicapp.services.VetService;
 
 import java.util.Set;
 
-public class VetServiceMap extends AbstractMapService<Vet, Long> implements CrudService<Vet, Long> {
+public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
     @Override
     public Set<Vet> findAll() {
         return super.findAll();
