@@ -1,11 +1,11 @@
 package laurente.reference.petclinicapp.services.map;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import laurente.reference.petclinicapp.model.BaseEntity;
 
-public abstract class AbstractMapService<T, ID> {
+import java.util.*;
+
+public abstract class AbstractMapService<T extends BaseEntity, ID extends Long> {
+
     protected Map<ID, T> map = new HashMap<>();
 
     Set<T> findAll() {
@@ -16,8 +16,16 @@ public abstract class AbstractMapService<T, ID> {
         return map.get(id);
     }
 
-    T save(ID id, T object) {
-        map.put(id, object);
+    @SuppressWarnings("unchecked")
+    T save(T object) throws RuntimeException {
+        if (object == null) {
+            throw new RuntimeException("Object to be saved cannot be null");
+        }
+
+        if (object.getId() == null) {
+            object.setId(getNextId());
+            map.put((ID) object.getId(), object);
+        }
 
         return object;
     }
@@ -28,5 +36,12 @@ public abstract class AbstractMapService<T, ID> {
 
     void delete(T object) {
         map.entrySet().removeIf(entry -> entry.getValue().equals(object));
+    }
+
+    private Long getNextId() {
+        if (map.isEmpty()) {
+            return 1L;
+        }
+        return Collections.<Long>max(map.keySet()) + 1L;
     }
 }
