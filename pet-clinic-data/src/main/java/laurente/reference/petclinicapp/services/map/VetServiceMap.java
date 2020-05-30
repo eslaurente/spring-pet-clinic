@@ -1,6 +1,7 @@
 package laurente.reference.petclinicapp.services.map;
 
 import laurente.reference.petclinicapp.model.Vet;
+import laurente.reference.petclinicapp.services.SpecialtyService;
 import laurente.reference.petclinicapp.services.VetService;
 import org.springframework.stereotype.Service;
 
@@ -8,6 +9,13 @@ import java.util.Set;
 
 @Service
 public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetService {
+
+    private final SpecialtyService specialtyService;
+
+    public VetServiceMap(SpecialtyService specialtyService) {
+        this.specialtyService = specialtyService;
+    }
+
     @Override
     public Set<Vet> findAll() {
         return super.findAll();
@@ -25,6 +33,13 @@ public class VetServiceMap extends AbstractMapService<Vet, Long> implements VetS
 
     @Override
     public Vet save(Vet object) {
+        object.getSpecialties().forEach(specialty -> {
+            Long id = specialty.getId();
+            if (id == null) {
+                specialty.setId(specialtyService.save(specialty).getId());
+            }
+        });
+
         return super.save(object);
     }
 

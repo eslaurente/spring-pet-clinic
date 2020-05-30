@@ -1,11 +1,9 @@
 package laurente.reference.petclinicapp.bootstrap;
 
-import laurente.reference.petclinicapp.model.Owner;
-import laurente.reference.petclinicapp.model.Pet;
-import laurente.reference.petclinicapp.model.PetType;
-import laurente.reference.petclinicapp.model.Vet;
+import laurente.reference.petclinicapp.model.*;
 import laurente.reference.petclinicapp.services.OwnerService;
 import laurente.reference.petclinicapp.services.PetTypeService;
+import laurente.reference.petclinicapp.services.SpecialtyService;
 import laurente.reference.petclinicapp.services.VetService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -18,15 +16,23 @@ public class DataLoader implements CommandLineRunner {
     private final OwnerService ownerService;
     private final VetService vetService;
     private final PetTypeService petTypeService;
+    private final SpecialtyService specialtyService;
 
-    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService) {
+    public DataLoader(OwnerService ownerService, VetService vetService, PetTypeService petTypeService, SpecialtyService specialtyService) {
         this.ownerService = ownerService;
         this.vetService = vetService;
         this.petTypeService = petTypeService;
+        this.specialtyService = specialtyService;
     }
 
     @Override
     public void run(String... args) {
+        if (petTypeService.findAll().size() == 0) {
+            loadData();
+        }
+    }
+
+    private void loadData() {
         // Add pet type data
         PetType dog = new PetType();
         dog.setName("Dog");
@@ -36,11 +42,27 @@ public class DataLoader implements CommandLineRunner {
         cat.setName("Cat");
         PetType savedCatType = petTypeService.save(cat);
 
-        System.out.println("Saved dog type: " + dog);
-        System.out.println("Saved cat type: " + cat);
+        System.out.printf("Successfully loaded pet types: %s, %s%n", savedDogType, savedDogType);
+
+        // Add specialties
+        Specialty radiologySpecialty = new Specialty();
+        radiologySpecialty.setName("Radiology");
+        radiologySpecialty.setDescription("Radiology medical specialty");
+        specialtyService.save(radiologySpecialty);
+
+        Specialty surgerySpecialty = new Specialty();
+        surgerySpecialty.setName("Surgery");
+        surgerySpecialty.setDescription("Surgery medical specialty");
+        specialtyService.save(surgerySpecialty);
+
+        Specialty dentistrySpecialty = new Specialty();
+        dentistrySpecialty.setName("Dentistry");
+        dentistrySpecialty.setDescription("Dentistry medical specialty");
+        specialtyService.save(dentistrySpecialty);
+
+        System.out.printf("Successfully loaded specialties: %s, %s, %s%n", radiologySpecialty, surgerySpecialty, dentistrySpecialty);
 
         // Add owners data
-
         Owner mikeOwner = new Owner();
         mikeOwner.setFirstName("Michael");
         mikeOwner.setLastName("Weston");
@@ -73,22 +95,23 @@ public class DataLoader implements CommandLineRunner {
 
         ownerService.save(fionaOwner);
 
-        System.out.println("Successfully loaded owners ...");
+        System.out.printf("Successfully loaded owners: %s, %s%n", mikeOwner, fionaOwner);
 
         // Add vets data
+        Vet samVet = new Vet();
+        samVet.setFirstName("Sam");
+        samVet.setLastName("Axe");
+        samVet.getSpecialties().add(radiologySpecialty);
 
-        Vet vet1 = new Vet();
-        vet1.setFirstName("Sam");
-        vet1.setLastName("Axe");
+        vetService.save(samVet);
 
-        vetService.save(vet1);
+        Vet jessieVet = new Vet();
+        jessieVet.setFirstName("Jessie");
+        jessieVet.setLastName("Porter");
+        jessieVet.getSpecialties().add(surgerySpecialty);
 
-        Vet vet2 = new Vet();
-        vet2.setFirstName("Jessie");
-        vet2.setLastName("Porter");
+        vetService.save(jessieVet);
 
-        vetService.save(vet2);
-
-        System.out.println("Successfully loaded vets ...");
+        System.out.printf("Successfully loaded vets: %s, %s%n", samVet, jessieVet);
     }
 }
