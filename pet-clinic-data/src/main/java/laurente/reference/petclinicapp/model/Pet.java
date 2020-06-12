@@ -21,12 +21,10 @@ public class Pet extends BaseEntity {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }

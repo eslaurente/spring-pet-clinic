@@ -1,7 +1,14 @@
 package laurente.reference.petclinicapp.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "specialties")
 public class Specialty extends BaseEntity {
 
+    @Column(name = "description")
     private String description;
 
     public String getDescription() {
@@ -15,8 +22,7 @@ public class Specialty extends BaseEntity {
     @Override
     public String toString() {
         return "Specialty{" +
-                "name='" + super.getName() + '\'' +
-                ", description='" + description + '\'' +
+                "description='" + description + '\'' +
                 '}';
     }
 }
