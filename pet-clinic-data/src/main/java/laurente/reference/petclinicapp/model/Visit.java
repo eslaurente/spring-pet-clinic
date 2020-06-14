@@ -1,11 +1,19 @@
 package laurente.reference.petclinicapp.model;
 
+import lombok.*;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
+@Data
+@EqualsAndHashCode(callSuper = true)
+@ToString(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 public class Visit extends BaseEntity {
 
@@ -18,37 +26,4 @@ public class Visit extends BaseEntity {
 
     @Column(name = "date")
     private LocalDate date;
-
-    public Pet getPet() {
-        return pet;
-    }
-
-    public void setPet(Pet pet) {
-        this.pet = pet;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    @Override
-    public String toString() {
-        return "Visit{" +
-                "pet=" + pet +
-                ", description='" + description + '\'' +
-                ", date=" + date +
-                '}';
-    }
 }

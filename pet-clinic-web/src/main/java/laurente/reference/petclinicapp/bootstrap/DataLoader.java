@@ -59,12 +59,13 @@ public class DataLoader implements CommandLineRunner {
         System.out.printf("Successfully loaded specialties: %s, %s, %s%n", radiologySpecialty, surgerySpecialty, dentistrySpecialty);
 
         // Add owners data
-        Owner mikeOwner = new Owner();
-        mikeOwner.setFirstName("Michael");
-        mikeOwner.setLastName("Weston");
-        mikeOwner.setAddress("123 Brickerel");
-        mikeOwner.setCity("Miami");
-        mikeOwner.setTelephone("383-932-2233");
+        Owner mikeOwner = Owner.builder()
+                .firstName("Michael")
+                .lastName("Weston")
+                .address("123 Brickerel")
+                .city("Miami")
+                .telephone("383-932-2233")
+                .build();
 
         Pet mikesPet = new Pet();
         mikesPet.setName("Rosco");
@@ -75,12 +76,13 @@ public class DataLoader implements CommandLineRunner {
 
         ownerService.save(mikeOwner);
 
-        Owner fionaOwner = new Owner();
-        fionaOwner.setFirstName("Fiona");
-        fionaOwner.setLastName("Glenanne");
-        fionaOwner.setAddress("123 Brickerel");
-        fionaOwner.setCity("Miami");
-        fionaOwner.setTelephone("383-932-2234");
+        Owner fionaOwner = Owner.builder()
+                .firstName("Fiona")
+                .lastName("Glenanne")
+                .address("123 Brickerel")
+                .city("Miami")
+                .telephone("383-932-2234")
+                .build();
 
         Pet fionasPet = new Pet();
         fionasPet.setName("Nibbler");
