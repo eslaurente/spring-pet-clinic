@@ -42,4 +42,13 @@ public class Visit extends BaseEntity {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return "Visit{" +
+                "pet=" + pet +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                '}';
+    }
 }
