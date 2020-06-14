@@ -3,11 +3,13 @@ package laurente.reference.petclinicapp.services.map;
 import laurente.reference.petclinicapp.model.Vet;
 import laurente.reference.petclinicapp.services.SpecialtyService;
 import laurente.reference.petclinicapp.services.VetService;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
 @Service
+@Profile({"default", "map"})
 public class VetMapService extends AbstractMapService<Vet, Long> implements VetService {
 
     private final SpecialtyService specialtyService;
