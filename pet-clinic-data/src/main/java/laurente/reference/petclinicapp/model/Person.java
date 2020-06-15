@@ -19,7 +19,7 @@ public class Person extends BaseEntity {
     @Column(name = "last_name")
     private String lastName;
 
-    @Builder(builderMethodName = "personBuilder")
+    @Builder(builderMethodName = "personBuilder", access = AccessLevel.PROTECTED)
     public Person(Long id, String firstName, String lastName) {
         super(id);
         this.firstName = firstName;
